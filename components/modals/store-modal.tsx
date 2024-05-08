@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Modal } from "@/components/ui/modal";
 import { useStoreModal } from "@/hooks/use-store-modal";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
@@ -14,6 +15,11 @@ const formSchema = z.object({
 });
 
 export const StoreModal = () => {
+
+
+    const [loading, setLoading] = useState(false)
+
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
 
@@ -46,17 +52,17 @@ export const StoreModal = () => {
                     <FormItem>
                         <FormLabel>Name</FormLabel>
                         <FormControl>
-                            <Input placeholder="E-commerce" {...field} />
+                            <Input disabled={loading} placeholder="E-commerce" {...field} />
                         </FormControl>
                             <FormMessage/>
                     </FormItem>
                 )}
               />
               <div className="space-x-2 pt-6 flex items-center justify-end w-full">
-                    <Button variant="outline" type="button" onClick={storeModal.onClose}>
+                    <Button variant="outline" type="button" onClick={storeModal.onClose} disabled={loading}>
                         Cancel
                     </Button>
-                    <Button type="submit">
+                    <Button type="submit" disabled={loading}>
                         Continuar
                     </Button>
               </div>
