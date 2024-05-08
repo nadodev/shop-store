@@ -8,7 +8,6 @@ export const ModalProvider = () => {
 
     useEffect(() => {
         setIsOpen(true)
-
     },[])
 
     if(!isOpen) {
